@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+  <PropertyGroup>
+    <MSBuildExecutionPAth>$(MSBuildExtensionsPath64)</MSBuildExecutionPAth>
+    <ProjectDir>.\</ProjectDir>
+    <SoltutionFileName>$(ProjectDir)/SpecFlowHelloWorld.sln</SoltutionFileName>
+    <OutputPath>C:\git\SpecFlowHelloWorld\out</OutputPath>
+    <NUnitToolPath>$(ProjectDir)\packages\NUnit.Runners.2.6.4\tools</NUnitToolPath>
+  </PropertyGroup>
+  
+  <Target Name="CleanDir" BeforeTargets="BuildSolution">
+    <Message Text="Cleaning output directory" Importance="high" />
+    <RemoveDir Directories="$(OutputPath)" Condition="Exists($(OutputPath))" />
+  </Target>
+
+  <!--<Target Name="SetVersions">
+    <ItemGroup>
+      <AssemblyInfoFiles Include="$(ProjectDir)\**\AssemblyInfo.cs" />
+    </ItemGroup>
+    <Message Text="Updating assembly versions for:" Importance="high" />
+    <Message Text="@(AssemblyInfoFiles->'%(FullPath)', ' ')" Importance="high" />
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyFileMajorVersion="5" AssemblyFileMinorVersion="10" />
+  </Target>-->
+  
+  <Target Name="BuildSolution">
+    <Message Text="Building solution" Importance="high" />
+    <MSBuild Projects="$(SoltutionFileName)" Properties="Configuration=Release;OutputPath=$(OutputPath)" />
+  </Target>
+
+  <Target Name="RunTests" AfterTargets="BuildSolution">
+    <ItemGroup>
+      <TestDLLs Include="$(OutputPath)\*.Tests.dll" />
+    </ItemGroup>
+    <Message Text="Running unit tests" Importance="high" />
+    <NUnit Assemblies="@(TestDLLs)" ToolPath="$(NUnitToolPath)" OutputXmlFile="$(OutputPath)\testresults.xml" />
+  </Target>
+
+
+  <Target Name="ReportTests" AfterTargets="ReportOnTests">
+     
+  </Target>
+  
+  <!--<Import Project="Common.props" />-->
+  <!--<Import Project="Common.targets" />-->
+  <!--<Import Project="test.tasks" />-->
+  <Import Project="C:\Program Files\MSBuild\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks" />
+  
+</Project>
