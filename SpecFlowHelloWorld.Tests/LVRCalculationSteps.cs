@@ -24,6 +24,7 @@ namespace SpecFlowHelloWorld.Tests
         [Given(@"a property price of (.*)")]
         public void GivenAPropertyPriceOf(Decimal propertyPrice)
         {
+            //test
             _propertyPrice = propertyPrice;
         }
 
