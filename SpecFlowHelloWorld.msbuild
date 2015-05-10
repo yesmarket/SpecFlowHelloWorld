@@ -28,13 +28,13 @@
     <MSBuild Projects="$(SoltutionFileName)" Properties="Configuration=Release;OutputPath=$(OutputPath)" />
   </Target>
 
-  <Target Name="RunTests" AfterTargets="BuildSolution">
+  <!--<Target Name="RunTests" AfterTargets="BuildSolution">
     <ItemGroup>
       <TestDLLs Include="$(OutputPath)\*.Tests.dll" />
     </ItemGroup>
     <Message Text="Running unit tests" Importance="high" />
     <NUnit Assemblies="@(TestDLLs)" ToolPath="$(NUnitToolPath)" OutputXmlFile="$(OutputPath)\testresults.xml" />
-  </Target>
+  </Target>-->
 
 
   <Target Name="ReportTests" AfterTargets="ReportOnTests">
@@ -44,6 +44,6 @@
   <!--<Import Project="Common.props" />-->
   <!--<Import Project="Common.targets" />-->
   <!--<Import Project="test.tasks" />-->
-  <Import Project="C:\Program Files\MSBuild\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks" />
+  <!--<Import Project="C:\Program Files\MSBuild\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks" />-->
   
 </Project>
